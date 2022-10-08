@@ -3,6 +3,8 @@ import NavBar from "./components/NavBar";
 import MoviesList from "./components/MoviesList";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MovieDetails from "./components/MovieDetails";
 function App() {
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -35,14 +37,28 @@ function App() {
       );
 
       setMovies(res.data.results);
-      setTotalPages(res.data.total_pages)
+      setTotalPages(res.data.total_pages);
     }
   };
   return (
     <div className="font color-body">
       <NavBar search={search} />
       <Container>
-        <MoviesList movies={movies} getPage={getPage} count={totalPages} />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MoviesList
+                  movies={movies}
+                  getPage={getPage}
+                  count={totalPages}
+                />
+              }
+            />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+          </Routes>
+        </BrowserRouter>
       </Container>
     </div>
   );

@@ -12,7 +12,9 @@ const MoviesList = ({ movies,getPage,count }) => {
       ) : (
         <h3 className="text-center p-5">لا يوجد افلام</h3>
       )}
-      <PaginationItem getPage={getPage} count={count} />
+      {
+        movies.length>0?<PaginationItem getPage={getPage} count={count} />:null
+      }
     </Row>
   );
 };

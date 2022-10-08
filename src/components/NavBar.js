@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
+import image from '../assets/cinema.png'
 const NavBar = ({search}) => {
   const onSearch = (text)=>{
     search(text);
@@ -10,7 +10,9 @@ const NavBar = ({search}) => {
       <Container>
         <Row className="pt-2">
           <Col xs="2" lg="1">
-            <img className="logo" src="cinema.png" alt="dfs" />
+            <a href="/">
+            <img className="logo" src={image} alt="dfs" />
+            </a>
           </Col>
           <Col xs="10" lang="11" className="d-flex align-items-center">
             <div className="search w-100">

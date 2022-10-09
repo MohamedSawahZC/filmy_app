@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactPaginate from "react-paginate";
-const PaginationItem = ({ getPage,count }) => {
-  const handlePageClick = (data) => {
-    getPage(data.selected + 1);
+import { useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getPageMovies } from "../redux/actions/movieActions";
+const PaginationItem = () => {
+  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const pages = useSelector((state) => state.pageCount);
+  useEffect(() => {
+    setCount(pages);
+  }, []);
+
+  const handlePageClick = async(data) => {
+   await dispatch(getPageMovies(data.selected + 1));
+
   };
+
   return (
     <ReactPaginate
       breakLabel="..."
